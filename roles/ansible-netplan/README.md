@@ -63,6 +63,15 @@ that can be set for this role.
               addresses:
                 - 10.11.12.99/24
 ```
+If you want to simply call it as a role once you download the repo
+- hosts: all
+  gather_facts: yes
+  any_errors_fatal: true
+  roles:
+    - role: ansible-netplan
+      netplan_enabled: true
+
+
 
 ## License
 
