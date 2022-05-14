@@ -1,0 +1,19 @@
+---
+- name: Install netplan
+  apt:
+    name: "{{ netplan_packages }}"
+    state: present
+  become: true
+  register: result
+  until: result is successful
+
+- name: Backup exitsing configurations before removing live ones
+  shell: mkdir -p /etc/netplan/backups
+
+- name: copy 00-install* netplan existing file to /etc/netplan/backups
+  shell: cp /etc/netplan/00-installer-config.yaml /etc/netplan/backups/00-installer-config.yaml.$(date +%Y-%m-%d-%H)
+
+- name: keep only 7 days of backups of previous network config /etc/netplan/backups
+  shell: /usr/bin/find /etc/netplan/backups -maxdepth 1 -name "00-installer*" -type f -mtime +7 -exec rm -rf {} \;
+
+

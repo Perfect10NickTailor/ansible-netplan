@@ -1,0 +1,20 @@
+- name: netplan apply 
+  shell: netplan apply
+  register: netplanapply 
+
+- debug:
+    var: netplanapply
+
+- name: Show vlans that are up or down
+  shell: ip a | grep vlan 
+  register: vlan
+
+- debug:
+    var: vlan.stdout_lines
+
+- name: show bridge details
+  shell: brctl show
+  register: bridges
+
+- debug: 
+    var: bridges.stdout_lines
