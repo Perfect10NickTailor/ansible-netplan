@@ -84,7 +84,7 @@ netplan_packages:
   - netplan.io
   - bridge-utils
 
-netplan_pri_domain: cudo.com
+netplan_pri_domain: nicktailor.com
 
 netplan_check_install: True
 
